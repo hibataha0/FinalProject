@@ -11,6 +11,8 @@ if (!$connect) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+echo "<h1>Word Synonym Search</h1>";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['word'])) {
     $word = mysqli_real_escape_string($connect, $_POST['word']); // Sanitize user input
 
@@ -18,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['word'])) {
     $query = "SELECT synonym FROM dbw WHERE word = '$word'";
     $result = mysqli_query($connect, $query);
 
-    echo "<h1>Search Results</h1>";
+    echo "<h2>Search Results</h2>";
 
     if (mysqli_num_rows($result) > 0) {
         while ($record = mysqli_fetch_assoc($result)) {
@@ -27,16 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['word'])) {
     } else {
         echo "<p>No synonym found for <strong>$word</strong>.</p>";
     }
-} else {
-    // Display the input form
-    echo '
-        <form method="POST">
-            <label for="word">Enter a word:</label>
-            <input type="text" id="word" name="word" required>
-            <button type="submit">Search</button>
-        </form>
-    ';
 }
+
+// Display the input form
+echo '
+    <form method="POST">
+        <label for="word">Enter a word:</label>
+        <input type="text" id="word" name="word" required>
+        <button type="submit">Search</button>
+    </form>
+';
 
 mysqli_close($connect);
 ?>
