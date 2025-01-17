@@ -210,6 +210,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['word'])) {
     <div class="container">
         <h1>Word Synonym Search</h1>
         
+        <h1>Word Synonym Search</h1>
+        
         <form method="POST">
             <div class="input-group">
                 <label for="word">Enter a word</label>
